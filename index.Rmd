@@ -1,10 +1,22 @@
 ---
 title: "Introdução ao R para Data Science"
-subtitle: "XLIX Congresso Brasileiro de Engenharia Agrícola"
 author: "Alan R. Panosso"
 date: "25/11/2020"
 output: html_document
 ---
+
+![](LOGO_BRANCA2.png)
+
+# Material Base do Curso
+
+![](book_cover.jpg)
+
+Long, J. D. & Teetor, P. (2019) R Cookbook. USA: O’Reilly Media, Inc, https://rc2e.com/.
+
+![](cover.png)
+
+Wickham, H. & Grolemund G. (2019) R for Data Science. https://r4ds.had.co.nz/.
+
 
 # O R
 
@@ -520,6 +532,6 @@ ad.test(res)
 lillie.test(res)
 cvm.test(res)
 ```
-# Referências
 
-TEETOR, P. R Cookbook. USA: O’Reilly Media, Inc, https://rc2e.com/.
+
+
