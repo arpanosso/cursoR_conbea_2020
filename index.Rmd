@@ -7,7 +7,9 @@ output: html_document
 
 ![](LOGO_BRANCA2.png)
 
-# Material Base do Curso
+# 1. Material Base do Curso
+
+Textos podem ser encontrados gratuitamente online!
 
 ![](book_cover.jpg)
 
@@ -16,6 +18,36 @@ Long, J. D. & Teetor, P. (2019) R Cookbook. USA: O’Reilly Media, Inc, https://
 ![](cover.png)
 
 Wickham, H. & Grolemund G. (2019) R for Data Science. https://r4ds.had.co.nz/.
+
+# 2. Ciência dos Dados (data Science)
+
+É uma área interdisciplinar voltada para o estudo e a análise de dados, estruturados e não-estruturados, que visa a extração de conhecimento, detecção de padrões e/ou obtenção de variáveis para possíveis tomadas de decisão. O modelo base das ferramentas necessárias em um projeto típico de ciência dos dados é parecido com isso:
+
+![](data-science.png)
+
+**Importar os dados:** Sem eles no R, não conseguimos fazer nada...
+
+**Organizar os dados:** De forma consistente que combine a semântica da base de dados com a maneira em que são armazenados.
+
+![](dados.png)
+
+Exemplo de dados organizados em uma planilha eletrônica, onde cada coluna é uma variável e cada linha é uma observação.
+
+**Transformar os dados:** Literalmente, recortar o banco de dados, assim pdoemos focar nas observações de interesse. Criar novas variáveis em função das existentes e calcular, por exemplo, um resumo estatístico desse conjunto de interesse. 
+
+Agora podemos gerar o conhecimento, através da **Visualização** e **Modelagem**.
+
+![](learnMath.jpeg)
+
+**Comunicação**: É a última etapa do data science, a mais importante.
+
+Uma dica importante, aprendam o RMarkdown!! ótimo para gerar relatórios (HTML, .doc e pdf)
+
+![](coverRMD.png)
+
+https://bookdown.org/yihui/rmarkdown-cookbook/
+
+
 
 
 # O R
