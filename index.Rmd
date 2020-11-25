@@ -1,6 +1,6 @@
 ---
 title: "Introdução ao R para Data Science"
-author: "Alan R. Panosso"
+author: "Alan R. Panosso <alan.panosso@unesp.br>"
 date: "25/11/2020"
 output: html_document
 ---
@@ -183,6 +183,15 @@ $$
 \end{aligned}
 $$
 
+```{r}
+7 > 5 ; 4 != 8
+nome <- 'Alan'
+nome == 'Rodrigo'
+nome == "Alan"
+```
+
+
+
 ### 6.4. Operações Lógicas
 
 $$
@@ -199,6 +208,10 @@ $$
 5 == 25/5 & 4 > 8
 !TRUE
 !FALSE
+
+x <- c(1, 4, 2, NA, 8)
+is.na(x)
+x[!is.na(x)]
 ```
 
 # 7. O R como uma calculadora
@@ -259,8 +272,9 @@ Símbolo utilizado para guardar uma informação em um objeto no R.
 x <- pi
 y <- -5:5
 nome <- "Cartola"
-res  = (nome == "Cartola")
-x<- 4 # atribuição tem caráter destrutivo, ele sobrescreve a informação
+res  = (nome == "Alan")
+x <- 4 # atribuição tem caráter destrutivo, ele sobrescreve a informação
+X <- pi
 ```
 
 ### 8.3. Objetos
@@ -295,8 +309,11 @@ test <- rep("testemunha",4)
 # Obtendo informações de objetos
 is.vector(x)
 is.vector(z)
-length(z)
+length(x)
+```
 
+
+```{r}
 # Uma matriz, tem a dimensão de linha de coluna
 A <- matrix(c(1,2,3,4,5,6,7,8,0), byrow = FALSE, ncol=3)
 A
@@ -304,8 +321,7 @@ A
 det(A)
 solve(A)
 round(A %*% solve(A))
-A %*% solve(A) %*% A
-
+(A %*% solve(A)) %*% A
 ```
 
 Um conjunto heterogêneo de dados é composto por elementos que não são do mesmo tipo primitivo, como exemplo, temos os data.frames e as listas (ou registros).
@@ -328,6 +344,9 @@ length(NOTAS)
 length(RA)
 dim(NOTAS)
 nrow(NOTAS)
+
+NOTAS[c(1,3),3:4]
+
 ```
 
 
@@ -338,7 +357,9 @@ nrow(NOTAS)
 Acesse o GitHub do Professor <https://github.com/arpanosso/cursoR_conbea_2020>
 
 ```{r}
-dados <- read.table("https://raw.githubusercontent.com/arpanosso/cursoR_conbea_2020/main/dados/geomorfologia.txt", h=TRUE,sep="\t")
+dados <- read.table("https://raw.githubusercontent.com/arpanosso/cursoR_conbea_2020/main/dados/geomorfologia.txt", 
+                    h=TRUE,
+                    sep="\t")
 ```
 
 ### 9.2. Banco de dados em TXT  
@@ -383,6 +404,7 @@ Para a manipulação dos nossos dados, vamos utilizar o pacote `dplyr`, que é u
 #### 10.3. glimpse
 
 A função `glimpse` retorna uma visão rápida a respeito da base de dados.
+
 ```{r}
 glimpse(dados)
 ```
@@ -399,9 +421,9 @@ dados %>%
 
 **Exemplo 2:** Crie outro banco de dados para aqueles registros com toer de argila maior que 10%, provenientes da superfície "I".
 ```{r}
-df<-dados %>% 
-  filter(ARGILA > 10, SUP == "III") %>% 
-  View()
+dados %>% 
+   filter(ARGILA > 10, SUP == "III") %>% 
+   View()
 ```
 
 **Exemplo 3:** Desse novo objeto, selecione todas as observações que não sejam Regossolo.
@@ -413,6 +435,7 @@ df %>%
 
 
 **Exemplo 4:** Quantos pontos experimentais existem em cada uma dessas superfícies?
+
 ```{r eval=FALSE}
 dados %>% 
   group_by(SUP) %>% 
@@ -431,10 +454,16 @@ dados %>%
 
 **Exemplo 6:**. Selecione os registros cujo solo é "PV4"
 ```{r eval=FALSE}
-dados %>% 
-  filter(str_detect(Solo,"PV4")) %>% 
-  View()
+da <- dados %>% 
+  filter(str_detect(Solo,"PV4"))
+mod<-lm(da$Ca~da$Mg)
+plot(da$Ca~da$Mg,pch=16,cex=1.4,col="red")
+abline(mod,col="blue",lty=2)
+summary.lm(mod)
 ```
+
+
+
 
 **Exemplo 7:**. Selecione os registros cujo nome do solo termina com o "p"
 ```{r eval=FALSE}
@@ -449,8 +478,7 @@ dados %>%
 **Exemplo 1:**. Classifique os registros por ordem crescente de teor de argila
 ```{r eval=FALSE}
 dados %>% 
-  arrange(ARGILA) %>% 
-  View()
+  arrange(ARGILA) 
 ```
 
 **Exemplo 2:**. Classifique os registros por ordem decrescente de teor de acidez $H+Al$.
@@ -521,7 +549,6 @@ dados %>%
 ![](textura.gif)
 
 ```{r eval=FALSE}
-range(dados$ARGILA)
 dados %>% 
   mutate(
     TEXTURA = case_when(
@@ -544,7 +571,8 @@ dados %>%
   group_by(SUP) %>% 
   summarise(N=length(Ca),
             media = mean(Ca),
-            mediana =median(Ca)
+            mediana =median(Ca),
+            variancia = var(Ca),
             assimetria = agricolae::skewness(Ca)
   )
 ```
@@ -559,8 +587,8 @@ dados %>%
 
 # Gráfico de Dispersão
 dados %>% 
-  ggplot(aes(x=Mg,y=Ca) ) + # dizer quem será o x e o y dentro de aes, ou seja, sua estética
-  geom_point() # chamar a geometria do gráfico, ou seja, tipod e gráfico
+  ggplot(aes(x=Mg,y=Ca) ) +
+  geom_point()
 ```
 
 **Exemplo 2:**. Construa um gráfico de dispersão entre a ARGILA e SILTE, mapeie as Superfícies por meio das cores no novo gráfico.
