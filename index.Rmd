@@ -1,6 +1,6 @@
 ---
 title: "Introdução ao R para Data Science"
-author: "Alan R. Panosso <alan.panosso@unesp.br>"
+author: "Alan Rodrigo Panosso <alan.panosso@unesp.br>"
 date: "25/11/2020"
 output: html_document
 ---
@@ -379,8 +379,8 @@ Faça o download do banco de dados [geomorfologia.xlsx](https://github.com/arpan
 
 ```{r}
 library(readxl)
-geomorfologia <- read_excel("C:/Users/Panosso/Desktop/geomorfologia.xlsx")
-View(geomorfologia)
+# geomorfologia <- read_excel("C:/Users/Panosso/Desktop/geomorfologia.xlsx")
+# View(geomorfologia)
 ```
 
 # 10. Manipulação dos dados
